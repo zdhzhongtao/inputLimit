@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh_CN">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>输入框数字控制插件demo</title>
+    <meta content="只是一个简单的插件" name="Keywords" />
+    <meta name="description" content="依赖jquery的输入框控制插件" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link rel="apple-touch-icon" href="http://img.yacol.com/uploads/allimg/121129/59_121129131703_1.jpg">
+    <link rel="Shortcut Icon" href="http://img.yacol.com/uploads/allimg/121129/59_121129131703_1.jpg" type="image/x-icon">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label>input0</label>
+            <input type="input" class="input0 form-control" placeholder="自定义正则(只能是中文字符)">
+        </div>
+        <div class="form-group">
+            <label>input1</label>
+            <input type="input" class="input1 form-control" placeholder="整数型">
+        </div>
+        <div class="form-group">
+            <label>input2</label>
+            <input type="input" class="input2 form-control" placeholder="只能是字母">
+        </div>
+        <div class="form-group">
+            <label>input3</label>
+            <input type="input" class="input3 form-control" placeholder="只能是数字和字母和下划线">
+        </div>
+        <div class="form-group">
+            <label>input4</label>
+            <input type="input" class="input4 form-control" placeholder="只能是数字和字母">
+        </div>
+        <div class="form-group">
+            <label>input5</label>
+            <input type="input" class="input5 form-control" placeholder="默认值，是数字">
+        </div>
+        <div class="form-group">
+            <label>input6</label>
+            <input type="input" class="input6 form-control" placeholder="数字不包括0">
+        </div>
+        <div class="form-group">
+            <label>input7</label>
+            <input type="input" class="input7 form-control" placeholder="数字有大小限制">
+        </div>
+        <div class="form-group">
+            <label>input8</label>
+            <input type="input" class="input8 form-control" placeholder="数字不能为-">
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="limitNum-3.0.0.js"></script>
+    <script>
+        $('.input0').limit({
+            "type": "custom", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "regularExpression": new RegExp(/[^\u4E00-\u6FA5]/,"g"),
+            "first": "normal"
+        });
+        $('.input1').limit({
+            "type": "int", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "normal",
+            "min": "normal",
+            "underline": true,
+        });
+        $('.input2').limit({
+            "type": "letters", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 3, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "normal",
+            "min": "normal",
+            "underline": true,
+        });
+        $('.input3').limit({
+            "type": "number_letters", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "normal",
+            "min": "normal",
+            "underline": true,
+        });
+        $('.input4').limit({
+            "type": "number_letters", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "normal",
+            "min": "normal",
+            "underline": false,
+        });
+        $('.input5').limit({
+            "type": "number", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "normal",
+            "min": "normal",
+            "underline": true,
+        });
+        $('.input6').limit({
+            "type": "number", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": false,
+            "max": "normal",
+            "min": "normal",
+            "underline": true,
+        });
+        $('.input7').limit({
+            "type": "number", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": true, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "100",
+            "min": "5",
+            "underline": true,
+        });
+        $('.input8').limit({
+            "type": "number", //如果只英文字母 letters、int  只允许输入数字和小数点 dot  数字和英文字符 number_letters和下划线
+            "negative": false, //默认可以输入负数
+            "first": 8, //使用normal 则不限制
+            "last": 2,
+            "includeZero": true,
+            "max": "100",
+            "min": "6",
+            "underline": true,
+        });
+    </script>
+</body>
+
+</html>

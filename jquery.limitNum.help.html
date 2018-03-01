@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="zh_CN">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>钟东洪输入框数字控制插件</title>
+    <meta content="只是一个简单的插件" name="Keywords"/>
+    <meta name="description" content="依赖jquery的输入框控制插件"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <link rel="apple-touch-icon" href="http://img.yacol.com/uploads/allimg/121129/59_121129131703_1.jpg">
+    <link rel="Shortcut Icon" href="http://img.yacol.com/uploads/allimg/121129/59_121129131703_1.jpg" type="image/x-icon">
+    <style type="text/css">
+        body {
+            background-color: #f0f0f0;
+        }
+        li{
+            list-style: none;
+        }
+        .plugin-desc {
+            padding: 6px 10px;
+        }
+        .page-block{
+
+        }
+        .page-content{
+            padding-left: 10px;
+        }
+        .block-title{
+            padding: 8px 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 1px 1px 5px 0 rgba(0,0,0,.2);
+        }
+        .user-tips{
+            padding: 4px 0;
+            margin-bottom: 10px;
+            border: 1px solid #cdcdcd;
+            box-shadow: 1px 1px 5px 0 rgba(0,0,0,.2);
+        }
+        .user-tips li{
+            padding: 8px 12px;
+        }
+        .user-tips li:not(:last-of-type){
+            border-bottom: 1px solid #cdcdcd;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            table-layout: fixed;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
+            border: 1px solid #cdcdcd;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px 2px;
+            line-height: 1.42857143;
+            vertical-align: middle;
+            border-top: 1px solid #cdcdcd;
+        }
+
+        .table-border > thead > td > th,
+        .table-border > tbody > td > th,
+        .table-border > tfoot > td > th,
+        .table-border > thead > td > td,
+        .table-border > tbody > td > td,
+        .table-border > tfoot > td > td {
+            border: 1px solid #cdcdcd;
+        }
+
+        .table-gradient > tbody > tr > th {
+            background: #e7e7e7;
+            background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cfcfcf));
+            background: -moz-linear-gradient(top, #ffffff, #cfcfcf);
+            filter: progid:DXImagetdansform.Microsoft.gradient(startColorstd='#ffffff', endColorstd='#cfcfcf');
+        }
+
+        .version-update-record {
+            margin-top: 10px;
+        }
+
+        .version-update-record .item {
+            margin-bottom: 12px;
+            padding: 6px 10px;
+            border: 1px solid #cdcdcd;
+            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+<div class="plugin-desc">
+    <h2>输入框数字控制插件</h2>
+    <p>版本号2.0.4</p>
+</div>
+<table class="table table-gradient ">
+    <tr>
+        <th>配置属性</th>
+        <th>可配置属性</th>
+        <th>用途</th>
+        <th>默认值</th>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td><span>number</span>、<span>int</span>、<span>letters</span>、<span>number_letters</span></td>
+        <td><span>只能输入数字和小数点</span><span>只能输入整数</span><span>只能输入大小写英文字符</span><span>只能输入数字和大小写英文字符</span></td>
+        <td>numnber</td>
+    </tr>
+    <tr>
+        <td>negative</td>
+        <td><span>布尔值</span></td>
+        <td>是否可以输入负号</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>first</td>
+        <td><span>整数或者normal</span></td>
+        <td>小数点前面位数</td>
+        <td>8</td>
+    </tr>
+    <tr>
+        <td>last</td>
+        <td><span>整数或者normal</span></td>
+        <td>小数点后面位数</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>includeZero</td>
+        <td>布尔值</td>
+        <td><span>是否包括0</span></td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>underline</td>
+        <td>布尔值</td>
+        <td><span>设置在使用控制数字字母的时候是否可以输入下划线</span></td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>max</td>
+        <td>整数或者normal</td>
+        <td><span>设置最大值</span></td>
+        <td>normal</td>
+    </tr>
+    <tr>
+        <td>callback</td>
+        <td>function(thisEle,val)</td>
+        <td><span>回调函数(当前作用的节点jquery对象,改变后的数字)</span></td>
+        <td>空</td>
+    </tr>
+</table>
+
+
+<div>
+    <div class="page-block">
+        <h3 class="block-title">注意事项</h3>
+        <div class="page-content">
+            <ul class="user-tips">
+                <li>在使用控制输入只能输入数字和英文字母时，下划线的设置不生效</li>
+                <li>设置英文字母和数字的时候还可以使用下划线，这个一般用于账号的输入内容,如果没有下划线，则使用underline: false</li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-block">
+        <h3 class="block-title">版本记录</h3>
+        <div class="page-content version-update-record">
+            <div class="item">
+                <h3>
+                    版本2.0.4
+                    <time>2016-12-27 13:57</time>
+                </h3>
+                <p>1、解除绑定的时候不要把全部的事件都删除了~~~~</p>
+            </div>
+            <div class="item">
+                <h3>
+                    版本2.0.3
+                    <time>2016-12-07 15:28</time>
+                </h3>
+                <p>1、完成输入数字字母的时候，可以区分是否可以使用下划线</p>
+            </div>
+            <div class="item">
+                <h3>版本2.0.2
+                    <time>2016-12-07 11:03</time>
+                </h3>
+                <p>1、完成最大值的输入</p>
+                <p>2、可以设置不限制位数，前面不限制位数和后面不显示位数都可以，都可以设置normal</p>
+            </div>
+            <div class="item">
+                <h3>版本2.0.1
+                    <time>2016-11-12 09:30</time>
+                </h3>
+                <p>1、重构代码，全部统一架构</p>
+                <p>2、完成输入框在ie8中会产生递归调用导致内存溢出的情况 </p>
+
+            </div>
+            <div class="item">
+                <h3>版本1.1.3
+                    <time>2016-09-27 14:48</time>
+                </h3>
+                <p>1、增加是否可以输入0</p>
+
+            </div>
+            <div class="item">
+                <h3>版本1.1.2
+                    <time>2016-08-22 11:38</time>
+                </h3>
+                <p>1、增加获取光标的位置在重置光标的位置</p>
+                <p>2、增加是否可以输入负数的内容</p>
+
+            </div>
+            <div class="item">
+                <h3>版本1.1.1
+                    <time>2016-08-10 16:47</time>
+                </h3>
+                <p>1、修复获取多个节点的数组jquery的对象时，一个节点改变全部节点都被复制的bug</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
